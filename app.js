@@ -52,6 +52,14 @@ app.post("/v1/book", (req, res) => {
   mockData.push(newBook);
   res.status(201).json(newBook);
 });
+app.delete("/v1/book/:bookId", (req, res) => {
+  const { bookId } = req.params;
+  const targetIndex = mockData.findIndex((v) => v.bookId === parseInt(bookId));
+  const target = mockData[targetIndex];
+  mockData.splice(targetIndex, 1);
+  console.log(mockData);
+  res.status(200).json(target);
+});
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
